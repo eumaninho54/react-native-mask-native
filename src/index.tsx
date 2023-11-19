@@ -12,7 +12,8 @@ const LINKING_ERROR =
   '- You are not using Expo Go\n';
 
 type MaskNativeProps = {
-  color: string;
+  value: string
+  onChangeValue: (event: { nativeEvent: { value: string } }) => void;
   style: ViewStyle;
 };
 
