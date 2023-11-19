@@ -14,6 +14,14 @@ class MaskNativeViewManager: RCTViewManager {
 }
 
 class MaskNativeView : UITextField {
+  @objc var value: String = "" {
+    didSet {
+      self.text = value
+    }
+  }
+
+  @objc var onChangeValue: RCTBubblingEventBlock?
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -25,7 +33,17 @@ class MaskNativeView : UITextField {
 
   @objc func textFieldDidChange() {
     if let text = self.text {
-      print(text)
+      var value: String = ""
+
+      // test mask
+      if text == "11" {
+        value = "2"
+      }
+      else {
+        value = text
+      }
+
+      onChangeValue?(["value": value])
     }
   }
 }
