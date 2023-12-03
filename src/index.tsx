@@ -3,6 +3,7 @@ import {
   UIManager,
   Platform,
   type ViewStyle,
+  type NativeSyntheticEvent,
 } from 'react-native';
 
 const LINKING_ERROR =
@@ -12,7 +13,9 @@ const LINKING_ERROR =
   '- You are not using Expo Go\n';
 
 type MaskNativeProps = {
-  color: string;
+  value: string;
+  onChangeValue?: (event: NativeSyntheticEvent<{ value: string }>) => void;
+  maskType: 'cpf';
   style: ViewStyle;
 };
 

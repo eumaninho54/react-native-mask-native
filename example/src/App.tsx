@@ -1,12 +1,21 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { MaskNativeView } from 'react-native-mask-native';
 
 export default function App() {
+  const [value, setValue] = useState('')
+
+  console.log(value, 'value')
+
   return (
     <View style={styles.container}>
-      <MaskNativeView color="#32a852" style={styles.box} />
+      <MaskNativeView
+        value={value}
+        onChangeValue={(e) => setValue(e.nativeEvent.value)}
+        maskType={'cpf'}
+        style={styles.box}
+      />
     </View>
   );
 }
@@ -18,8 +27,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   box: {
-    width: 60,
+    width: 80,
     height: 60,
     marginVertical: 20,
+    backgroundColor: 'red'
   },
 });
