@@ -2,6 +2,7 @@ import UIKit
 
 @objc(MaskNativeViewManager)
 
+
 class MaskNativeViewManager: RCTViewManager {
 
   override func view() -> (MaskNativeView) {
@@ -20,7 +21,9 @@ class MaskNativeView : UITextField {
     }
   }
 
-  @objc var onChangeValue: RCTBubblingEventBlock?
+  @objc var maskType: String = ""
+
+  @objc var onChangeValue: RCTDirectEventBlock?
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -33,17 +36,11 @@ class MaskNativeView : UITextField {
 
   @objc func textFieldDidChange() {
     if let text = self.text {
-      var value: String = ""
+      var newValue: String = MaskController(maskType: maskType, value: text).execute()
 
-      // test mask
-      if text == "11" {
-        value = "2"
-      }
-      else {
-        value = text
-      }
+      onChangeValue?(["value": newValue])
 
-      onChangeValue?(["value": value])
+      self.text = newValue
     }
   }
 }
