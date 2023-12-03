@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { MaskNativeView } from 'react-native-mask-native';
 
 export default function App() {
-  const [value, setValue] = useState('testando')
+  const [value, setValue] = useState('')
+
+  console.log(value, 'value')
 
   return (
     <View style={styles.container}>
       <MaskNativeView
         value={value}
-        onChangeValue={({ nativeEvent: { value } }) => setValue(value)}
-        //color="#32a852"
+        onChangeValue={(e) => setValue(e.nativeEvent.value)}
+        maskType={'cpf'}
         style={styles.box}
       />
     </View>
